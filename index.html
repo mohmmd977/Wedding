@@ -245,13 +245,15 @@
 
 <script>
   function openInvitation(){
-    const opening = document.getElementById('opening');
-    opening.classList.add('open');
-    setTimeout(()=>opening.classList.add('hidden'), 1400);
+  const opening = document.getElementById('opening');
+  const music = document.getElementById('weddingMusic');
 
-    // مرورگرهای موبایل معمولاً پخش خودکار موسیقی را محدود می‌کنند.
-    // بعد از باز شدن دعوت‌نامه، کاربر می‌تواند دکمه Play را بزند.
-  }
+  music.currentTime = 60;
+  music.play().catch(() => {});
+
+  opening.classList.add('open');
+  setTimeout(() => opening.classList.add('hidden'), 1400);
+}
 
   // ۱۷ شهریور ۱۴۰۵ = ۸ سپتامبر ۲۰۲۶، ساعت ۱۸:۳۰
   // برای دقت در هر دستگاه، زمان محلی دستگاه کاربر استفاده می‌شود.
