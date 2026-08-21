@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#173f32">
+<title>مراسم عروسی | محمد و شیوا</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
+
+  :root{
+    --green:#173f32;
+    --green2:#245846;
+    --cream:#f7f0df;
+    --cream2:#fffaf0;
+    --gold:#c9a45b;
+    --text:#17382f;
+    --muted:#68776f;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--text);
+    font-family:"Vazirmatn",Tahoma,sans-serif;
+    overflow-x:hidden;
+  }
+  button,a{font:inherit}
+  .opening{
+    position:fixed; inset:0; z-index:50;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--green);
+    transition:opacity 1s ease, visibility 1s ease;
+  }
+  .opening.hidden{opacity:0;visibility:hidden;pointer-events:none}
+  .door{
+    position:absolute; top:0; bottom:0; width:50%;
+    background:var(--cream);
+    border:1px solid rgba(201,164,91,.7);
+    transition:transform 1.25s cubic-bezier(.7,0,.2,1);
+  }
+  .door.left{left:0;border-radius:0 0 35% 0; transform-origin:left center}
+  .door.right{right:0;border-radius:0 0 0 35%; transform-origin:right center}
+  .opening.open .door.left{transform:translateX(-100%)}
+  .opening.open .door.right{transform:translateX(100%)}
+  .seal{
+    position:relative; z-index:2; text-align:center; color:var(--cream);
+    transition:opacity .5s ease;
+  }
+  .opening.open .seal{opacity:0}
+  .seal .leaf{font-size:34px;color:var(--gold)}
+  .seal h1{font-size:18px;font-weight:500;letter-spacing:2px;margin:16px 0 8px}
+  .seal h2{font-size:40px;margin:0 0 26px;font-weight:700}
+  .open-btn{
+    border:1px solid var(--gold); background:transparent; color:var(--cream);
+    padding:12px 30px;border-radius:999px;cursor:pointer
+  }
+
+  main{max-width:760px;margin:auto}
+  .hero{
+    min-height:100svh; display:flex; align-items:center; justify-content:center;
+    padding:35px 20px; position:relative; overflow:hidden;
+    background:
+      radial-gradient(circle at 15% 20%,rgba(201,164,91,.18),transparent 25%),
+      radial-gradient(circle at 85% 80%,rgba(36,88,70,.12),transparent 28%),
+      var(--green);
+    color:var(--cream);
+  }
+  .hero:before,.hero:after{
+    content:"";position:absolute;width:220px;height:220px;border:1px solid rgba(201,164,91,.35);
+    border-radius:50%;filter:blur(.1px)
+  }
+  .hero:before{top:-110px;right:-80px}.hero:after{bottom:-120px;left:-90px}
+  .hero-inner{text-align:center;position:relative;z-index:1}
+  .eyebrow{font-size:16px;letter-spacing:1px;color:#e4cf9d}
+  .ornament{font-size:28px;color:var(--gold);margin:16px 0}
+  .names{font-size:clamp(48px,12vw,82px);margin:0;font-weight:700;line-height:1.15}
+  .heart{font-size:26px;color:#e7c982;margin:16px 0}
+  .tagline{font-size:17px;margin:0;color:#eee4cd}
+  .scroll{margin-top:45px;opacity:.75;font-size:13px}
+  .scroll span{display:block;margin-top:8px;font-size:22px}
+
+  section{padding:34px 18px}
+  .card{
+    background:rgba(255,250,240,.82); border:1px solid rgba(201,164,91,.55);
+    border-radius:24px; padding:30px 22px; box-shadow:0 12px 35px rgba(23,63,50,.08);
+  }
+  .title{text-align:center;margin:0 0 22px;font-size:23px;color:var(--green)}
+  .invite{text-align:center;line-height:2.15;font-size:16px}
+  .invite strong{display:block;font-size:25px;margin:15px 0;color:var(--green)}
+  .details{background:var(--green);color:var(--cream)}
+  .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .detail{
+    border:1px solid rgba(201,164,91,.4);border-radius:18px;padding:18px 10px;text-align:center;
+  }
+  .icon{font-size:25px;color:#e1c47e;margin-bottom:7px}
+  .detail small{display:block;color:#d7d3c7;margin-bottom:4px}
+  .detail b{font-size:16px}
+  .address{line-height:1.9}
+  .map-btn,.call-btn{
+    display:block;text-align:center;text-decoration:none;border-radius:999px;
+    padding:14px 20px;margin-top:20px;font-weight:600;
+  }
+  .map-btn{background:var(--cream);color:var(--green);border:1px solid var(--gold)}
+  .call-btn{background:transparent;color:var(--cream);border:1px solid rgba(201,164,91,.7)}
+
+  .countdown-wrap{text-align:center}
+  .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .time{
+    background:var(--green);color:var(--cream);border-radius:17px;padding:15px 5px;
+    border:1px solid rgba(201,164,91,.45)
+  }
+  .time b{display:block;font-size:28px;color:#fff}
+  .time span{font-size:11px;color:#d9d3c4}
+
+  .music{
+    display:flex;align-items:center;gap:15px;background:var(--green);color:var(--cream);
+  }
+  .music-icon{
+    width:56px;height:56px;border-radius:50%;display:grid;place-items:center;
+    border:1px solid var(--gold);font-size:23px;flex:none
+  }
+  .music-info{flex:1}
+  .music-info b{display:block;font-size:15px;margin-bottom:4px}
+  .music-info small{color:#d9d3c4}
+  audio{width:100%;margin-top:13px;height:36px}
+  .note{font-size:12px;color:var(--muted);line-height:1.8;margin-top:10px}
+
+  footer{text-align:center;padding:10px 20px 50px;color:var(--muted)}
+  .fade{animation:fadeUp 1s ease both}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+  @media(max-width:420px){
+    .detail-grid{grid-template-columns:1fr}
+    .names{font-size:52px}
+    .countdown{gap:5px}
+    .time b{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div class="opening" id="opening">
+  <div class="door left"></div>
+  <div class="door right"></div>
+  <div class="seal">
+    <div class="leaf">❧</div>
+    <h1>مراسم عروسی</h1>
+    <h2>محمد و شیوا</h2>
+    <button class="open-btn" onclick="openInvitation()">مشاهده دعوت‌نامه</button>
+  </div>
+</div>
+
+<main>
+  <header class="hero">
+    <div class="hero-inner fade">
+      <div class="eyebrow">به نام آنکه عشق را آفرید</div>
+      <div class="ornament">✦</div>
+      <h1 class="names">محمد و شیوا</h1>
+      <div class="heart">♡</div>
+      <p class="tagline">با عشق، آغاز یک زندگی</p>
+      <div class="scroll">برای مشاهده جزئیات<br><span>⌄</span></div>
+    </div>
+  </header>
+
+  <section>
+    <div class="card invite fade">
+      <h2 class="title">دعوت به یک شب به‌یادماندنی</h2>
+      <div>
+        به نام آنکه عشق را آفرید<br>
+        با نهایت شادی و افتخار، از شما دعوت می‌کنیم<br>
+        تا در آغاز فصل تازه‌ای از زندگی مشترکمان<br>
+        در کنار ما باشید و شادی این شب به‌یادماندنی را<br>
+        با حضورتان کامل کنید.
+      </div>
+      <strong>محمد و شیوا</strong>
+      حضورتان، زیباترین هدیه‌ی این شب برای ماست. 🤍
+    </div>
+  </section>
+
+  <section>
+    <div class="card details fade">
+      <h2 class="title" style="color:var(--cream)">مراسم عروسی</h2>
+      <div class="detail-grid">
+        <div class="detail">
+          <div class="icon">◷</div>
+          <small>تاریخ</small>
+          <b>سه‌شنبه<br>۱۷ شهریور ۱۴۰۵</b>
+        </div>
+        <div class="detail">
+          <div class="icon">⌚</div>
+          <small>ساعت</small>
+          <b>۱۸:۳۰<br>تا پاسی از شب</b>
+        </div>
+        <div class="detail">
+          <div class="icon">♧</div>
+          <small>مکان</small>
+          <b>تالار باغ سبز</b>
+        </div>
+        <div class="detail">
+          <div class="icon">⌖</div>
+          <small>آدرس</small>
+          <b class="address">خیابان آتشگاه، بعد از سه‌راه درچه، کانال نشاط، کوچه باستان</b>
+        </div>
+      </div>
+      <a class="map-btn" href="https://nshn.ir/55rbZqewpxT3KZ" target="_blank" rel="noopener">📍 مسیریابی مراسم</a>
+      <a class="call-btn" href="tel:09135559735">☎ هماهنگی: پدر داماد — ۰۹۱۳۵۵۵۹۷۳۵</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="card countdown-wrap fade">
+      <h2 class="title">تا آغاز این شب زیبا...</h2>
+      <div class="countdown" id="countdown">
+        <div class="time"><b id="days">--</b><span>روز</span></div>
+        <div class="time"><b id="hours">--</b><span>ساعت</span></div>
+        <div class="time"><b id="minutes">--</b><span>دقیقه</span></div>
+        <div class="time"><b id="seconds">--</b><span>ثانیه</span></div>
+      </div>
+      <p class="note">زمان مراسم: سه‌شنبه ۱۷ شهریور ۱۴۰۵، ساعت ۱۸:۳۰</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card music fade">
+      <div class="music-icon">♫</div>
+      <div class="music-info">
+        <b>عشوه — بیژن مرتضوی</b>
+        <small>نسخه بی‌کلام</small>
+        <audio id="weddingMusic" controls preload="metadata">
+          <source src="music.mp3" type="audio/mpeg">
+          مرورگر شما از پخش صوت پشتیبانی نمی‌کند.
+        </audio>
+      </div>
+    </div>
+    <p class="note">برای پخش موسیقی، فایل قانونی نسخه بی‌کلام را با نام <b>music.mp3</b> در کنار همین فایل HTML قرار دهید.</p>
+  </section>
+
+  <footer>
+    با حضور شما، این شب زیباتر می‌شود ♡<br>
+    <b>محمد و شیوا</b>
+  </footer>
+</main>
+
+<script>
+  function openInvitation(){
+    const opening = document.getElementById('opening');
+    opening.classList.add('open');
+    setTimeout(()=>opening.classList.add('hidden'), 1400);
+
+    // مرورگرهای موبایل معمولاً پخش خودکار موسیقی را محدود می‌کنند.
+    // بعد از باز شدن دعوت‌نامه، کاربر می‌تواند دکمه Play را بزند.
+  }
+
+  // ۱۷ شهریور ۱۴۰۵ = ۸ سپتامبر ۲۰۲۶، ساعت ۱۸:۳۰
+  // برای دقت در هر دستگاه، زمان محلی دستگاه کاربر استفاده می‌شود.
+  const target = new Date(2026, 8, 8, 18, 30, 0);
+
+  function faNum(n){
+    return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+  }
+
+  function updateCountdown(){
+    let diff = target.getTime() - Date.now();
+    if(diff <= 0){
+      document.getElementById('countdown').innerHTML =
+        '<div style="grid-column:1/-1;font-size:22px;padding:15px">امشب، شبِ عشقِ محمد و شیواست ♡</div>';
+      return;
+    }
+    const days = Math.floor(diff / 86400000); diff %= 86400000;
+    const hours = Math.floor(diff / 3600000); diff %= 3600000;
+    const minutes = Math.floor(diff / 60000); diff %= 60000;
+    const seconds = Math.floor(diff / 1000);
+    document.getElementById('days').textContent = faNum(days);
+    document.getElementById('hours').textContent = faNum(hours);
+    document.getElementById('minutes').textContent = faNum(minutes);
+    document.getElementById('seconds').textContent = faNum(seconds);
+  }
+  updateCountdown();
+  setInterval(updateCountdown,1000);
+</script>
+</body>
+</html>
